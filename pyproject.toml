@@ -14,6 +14,7 @@ mypy = "^0.930"
 pydocstyle = "^6.1.1"
 pylint = "^2.12.2"
 pytest = "^7.1.2"
+toml = "^0.10.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

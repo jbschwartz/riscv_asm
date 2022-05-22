@@ -14,10 +14,12 @@ class TokenType(enum.Enum):
     PLUS = "+"
 
 
+# pylint: disable=too-few-public-methods
 class Token:
     """A single Token found in an assembly code Block."""
 
     def __init__(self, value: Optional[str] = "") -> None:
+        """Create a new Token with the text value."""
         self.value = value
 
         # Ensure that the token value is a recognizable type. Alphanumeric types will not

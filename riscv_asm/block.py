@@ -4,12 +4,15 @@ from typing import Optional
 from .token import Token, TokenType
 
 
+# pylint: disable=too-few-public-methods
 class Block:
     """A single line of assembly code.
 
-    This class is used as a lexer for tokenizing the input assembly."""
+    This class is used as a lexer for tokenizing the input assembly.
+    """
 
     def __init__(self, line: str = "") -> None:
+        """Create a new Block with one line of assembly code."""
         self.string = line
         # Store the index of a cursor for iterating through the string.
         self.cursor = 0
@@ -76,6 +79,8 @@ class Block:
 
         if self._char is not None:
             raise ValueError(f"Unknown character found: '{self._char}' at position {self.cursor}")
+
+        return None
 
     def _whitespace(self) -> None:
         """Advance the cursor over any whitespace characters."""
