@@ -1,0 +1,24 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.10']
+      max-parallel: 5
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: abatilo/actions-poetry@v2.1.4
+    - run: poetry install
+    - run: poetry run pydocstyle ./riscv_asm
+    - run: poetry run pylint ./riscv_asm
+    - run: poetry run black --check .
+    - run: poetry run pytest

@@ -1,0 +1,8 @@
+name: riscv_asm
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - poetry
