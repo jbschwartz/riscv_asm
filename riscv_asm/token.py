@@ -1,10 +1,35 @@
 import enum
+from typing import Optional
 
 
 class TokenType(enum.Enum):
-    SYMBOL = enum.auto()
+    """Type of permissible Tokens in an assembly code Block."""
+
+    ALPHANUM = chr(0)
+    CLOSE_PAREN = ")"
+    COMMA = ","
+    MINUS = "-"
+    OPEN_PAREN = "("
+    PERIOD = "."
+    PLUS = "+"
 
 
 class Token:
-    def __init__(self) -> None:
-        self.type = None
+    """A single Token found in an assembly code Block."""
+
+    def __init__(self, value: Optional[str] = "") -> None:
+        self.value = value
+
+        # Ensure that the token value is a recognizable type. Alphanumeric types will not
+        # match the enumeration's value so check them separately.
+        try:
+            self.type = TokenType(self.value)
+        except ValueError as e:
+            if self.value is not None and not self.value.isalnum():
+                raise e
+
+            self.type = TokenType.ALPHANUM if self.value.isalnum() else None
+
+    def __str__(self) -> str:
+        """Return a readable representation of the Token."""
+        return f'"{self.value}" ({str(self.type.name)})'
